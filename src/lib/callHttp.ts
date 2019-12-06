@@ -18,7 +18,7 @@ export default async function callHttp(
   requestURL: string,
   requestOptions: RequestOptions,
 ): Promise<string | Record<string, any>> {
-  let { body = '' } = requestOptions;
+  let { body = null } = requestOptions;
   const { method, headers = {} as HeadersInit } = requestOptions;
   // @ts-ignore
   const requestContentType: string = headers['content-type'] || '';

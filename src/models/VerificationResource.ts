@@ -34,20 +34,20 @@ export enum StepStatusTypes {
 }
 
 enum StepErrorTypes {
-  systemError = 'SystemError',
-  legacyError = 'LegacyError',
-  stepError = 'StepError'
+  SystemError = 'SystemError',
+  LegacyError = 'LegacyError',
+  StepError = 'StepError'
 }
 
 enum ErrorCodes {
-  legacyError = 'legacy.error',
-  systemServiceUnavailableError = 'system.serviceUnavailable',
-  systemInternalError = 'system.internalError',
-  stepIneNotEnoughParamsError = 'ine.notEnoughParams',
-  stepIneNotFoundError = 'ine.notFound',
-  stepCurpInvalidError = 'curp.invalid',
-  stepCurpNotFoundError = 'curp.notFound',
-  stepfullNameMismatchError = 'curp.fullNameMismatch',
+  LegacyError = 'legacy.error',
+  SystemServiceUnavailableError = 'system.serviceUnavailable',
+  SystemInternalError = 'system.internalError',
+  StepIneNotEnoughParamsError = 'ine.notEnoughParams',
+  StepIneNotFoundError = 'ine.notFound',
+  StepCurpInvalidError = 'curp.invalid',
+  StepCurpNotFoundError = 'curp.notFound',
+  StepfullNameMismatchError = 'curp.fullNameMismatch',
 }
 
 export interface StepError {

@@ -44,16 +44,16 @@ enum LegacyErrorCodes {
 }
 
 enum SystemErrorCodes {
-  ServiceUnavailableError = 'system.serviceUnavailable',
+  ServiceUnavailable = 'system.serviceUnavailable',
   InternalError = 'system.internalError',
 }
 
 enum StepErrorCodes {
-  IneNotEnoughParamsError = 'ine.notEnoughParams',
-  IneNotFoundError = 'ine.notFound',
-  CurpInvalidError = 'curp.invalid',
-  CurpNotFoundError = 'curp.notFound',
-  FullNameMismatchError = 'curp.fullNameMismatch',
+  IneNotEnoughParams = 'ine.notEnoughParams',
+  IneNotFound = 'ine.notFound',
+  CurpInvalid = 'curp.invalid',
+  CurpNotFound = 'curp.notFound',
+  FullNameMismatch = 'curp.fullNameMismatch',
 }
 
 export interface StepError {

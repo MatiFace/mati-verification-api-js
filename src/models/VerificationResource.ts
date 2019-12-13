@@ -33,11 +33,40 @@ export enum StepStatusTypes {
   Complete = 200,
 }
 
+enum StepErrorTypes {
+  SystemError = 'SystemError',
+  LegacyError = 'LegacyError',
+  StepError = 'StepError'
+}
+
+enum LegacyErrorCodes {
+  LegacyError = 'legacy.error',
+}
+
+enum SystemErrorCodes {
+  ServiceUnavailable = 'system.serviceUnavailable',
+  InternalError = 'system.internalError',
+}
+
+enum StepErrorCodes {
+  IneNotEnoughParams = 'ine.notEnoughParams',
+  IneNotFound = 'ine.notFound',
+  CurpInvalid = 'curp.invalid',
+  CurpNotFound = 'curp.notFound',
+  CurpFullNameMismatch = 'curp.fullNameMismatch',
+}
+
+export interface StepError {
+  type: StepErrorTypes;
+  code: LegacyErrorCodes | SystemErrorCodes | StepErrorCodes | string;
+  message: string;
+}
+
 export interface Step {
   id: StepIdTypes;
   status: StepStatusTypes;
   data?: any; // TODO: TBD
-  error?: any; // TODO: TBD
+  error?: StepError;
 }
 
 export interface VerificationDocument {

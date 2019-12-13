@@ -47,7 +47,7 @@ enum ErrorCodes {
   StepIneNotFoundError = 'ine.notFound',
   StepCurpInvalidError = 'curp.invalid',
   StepCurpNotFoundError = 'curp.notFound',
-  StepfullNameMismatchError = 'curp.fullNameMismatch',
+  StepFullNameMismatchError = 'curp.fullNameMismatch',
 }
 
 export interface StepError {

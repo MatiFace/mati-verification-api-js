@@ -112,32 +112,23 @@ you'll receive in webhooks. It allows you to connect the beginning part of verif
 
 After that you'll be able to upload the user verification data (images of document - front/back, selfie image, liveness video).
 
-Let's create request data:
+Let's create request data. We created builder class for such requests in order to make it easy for you:
 
 ```js
 // This request contains front photo of a document. Other examples will be in the next sections.
-const sendInputRequest = {
-  inputs: [
-    {
-      inputType: 'document-photo',
-      group: 0,
-      data: {
-        type: 'national-id',
-        country: 'US',
-        region: 'IL',
-        page: 'front',
-        filename: 'front.jpeg',
-      },
+const sendInputRequest = SendInputRequestBuilder
+  .createWithDocumentPhoto(
+   {
+      type: 'national-id',
+      country: 'US',
+      region: 'IL',
     },
-  ],
-  files: [
     {
-      mediaType: 'document',
       fileName: 'front',
       stream: fs.createReadStream('./assets/front.jpeg'),
     },
-  ],
-};
+  )
+  .build();
 ```
 
 and send them:
@@ -157,172 +148,95 @@ Notes:
 ###### Single document photo input
 
 ```js
-const sendInputRequest = {
-  inputs: [
-    {
-      inputType: 'document-photo',
-      group: 0,
-      data: {
-        type: 'national-id',
-        country: 'US',
-        region: 'IL',
-        page: 'front',
-        filename: 'front.jpeg',
-      },
+const sendInputRequest = SendInputRequestBuilder
+  .createWithDocumentPhoto(
+   {
+      type: 'national-id',
+      country: 'US',
+      region: 'IL',
     },
-  ],
-  files: [
     {
-      mediaType: 'document',
       fileName: 'front',
       stream: fs.createReadStream('./assets/front.jpeg'),
     },
-  ],
-};
+  )
+  .build();
 ```
 
 ###### Two sided document photos input
 
 ```js
-const sendInputRequest = {
-  inputs: [
-    {
-      inputType: 'document-photo',
-      group: 0,
-      data: {
-        type: 'national-id',
-        country: 'US',
-        region: 'IL',
-        page: 'front',
-        filename: 'front.jpeg',
-      },
+const sendInputRequest = SendInputRequestBuilder
+  .createWithDocumentPhoto(
+   {
+      type: 'national-id',
+      country: 'US',
+      region: 'IL',
     },
     {
-      inputType: 'document-photo',
-      group: 0,
-      data: {
-        type: 'national-id',
-        country: 'US',
-        region: 'IL',
-        page: 'back',
-        filename: 'back.jpeg',
-      },
-    },
-  ],
-  files: [
-    {
-      mediaType: 'document',
       fileName: 'front',
       stream: fs.createReadStream('./assets/front.jpeg'),
     },
     {
-      mediaType: 'document',
       fileName: 'back',
       stream: fs.createReadStream('./assets/back.jpeg'),
     },
-  ],
-};
+  )
+  .build();
 ```
 
 ###### Selfie photo input
 
 ```js
-const sendInputRequest = {
-  inputs: [
+const sendInputRequest = SendInputRequestBuilder
+  .createWithSelfiePhoto(
     {
-      inputType: 'selfie-photo',
-      group: 0,
-      data: {
-        filename: 'selfie.jpeg',
-      },
-    },
-  ],
-  files: [
-    {
-      mediaType: 'selfie',
       fileName: 'selfie',
       stream: fs.createReadStream('./assets/selfie.jpeg'),
     },
-  ],
-};
+  )
+  .build();
 ```
 
 ###### Liveness video input
 
 ```js
-const sendInputRequest = {
-  inputs: [
+const sendInputRequest = SendInputRequestBuilder
+  .createWithSelfieVideo(
     {
-      inputType: 'selfie-video',
-      group: 0,
-      data: {
-        filename: 'video.jpeg',
-      },
-    },
-  ],
-  files: [
-    {
-      mediaType: 'video',
       fileName: 'video',
       stream: fs.createReadStream('./assets/video.jpeg'),
     },
-  ],
-};
+  )
+  .build();
 ```
 
 ###### Full user input (documents & biometrics)
 
 ```js
-const sendInputRequest = {
-  inputs: [
-    {
-      inputType: 'document-photo',
-      group: 0,
-      data: {
-        type: 'national-id',
-        country: 'US',
-        region: 'IL',
-        page: 'front',
-        filename: 'front.jpeg',
-      },
+const sendInputRequest = SendInputRequestBuilder
+  .createWithDocumentPhoto(
+   {
+      type: 'national-id',
+      country: 'US',
+      region: 'IL',
     },
     {
-      inputType: 'document-photo',
-      group: 0,
-      data: {
-        type: 'national-id',
-        country: 'US',
-        region: 'IL',
-        page: 'back',
-        filename: 'back.jpeg',
-      },
-    },
-    {
-      inputType: 'selfie-video',
-      group: 0,
-      data: {
-        filename: 'video.jpeg',
-      },
-    },
-  ],
-  files: [
-    {
-      mediaType: 'document',
       fileName: 'front',
       stream: fs.createReadStream('./assets/front.jpeg'),
     },
     {
-      mediaType: 'document',
       fileName: 'back',
       stream: fs.createReadStream('./assets/back.jpeg'),
     },
+  )
+  .appendSelfieVideo(
     {
-      mediaType: 'video',
       fileName: 'video',
       stream: fs.createReadStream('./assets/video.jpeg'),
     },
-  ],
-};
+  )
+  .build();
 ```
 
 ##### Webhooks for API integration

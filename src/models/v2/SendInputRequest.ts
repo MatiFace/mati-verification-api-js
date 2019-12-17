@@ -17,18 +17,26 @@ export enum PageTypes {
   Front = 'front',
 }
 
-export interface DocumentPhotoInputData {
+export type DocumentPhotoInputData = {
   type: DocumentTypeTypes;
   country: string;
   region?: string;
   page: PageTypes;
   filename: string;
-}
+};
+
+export type SelfiePhotoInputData = {
+  filename: string;
+};
+
+export type SelfieVideoInputData = {
+  filename: string;
+};
 
 export interface Input<T> {
   inputType: InputTypeTypes,
   group: number,
-  data: T, // TODO: TBD
+  data: T,
 }
 
 export enum MediaTypeTypes {
@@ -44,6 +52,6 @@ interface FileRecord {
 }
 
 export default interface SendInputRequest {
-  inputs: Input<any>[],
+  inputs: Input<DocumentPhotoInputData | SelfiePhotoInputData | SelfieVideoInputData>[],
   files: FileRecord[],
 }

@@ -2,14 +2,9 @@ import fs from 'fs';
 
 import './config';
 import { apiService } from '../main';
-import SendInputRequest, {
-  DocumentPhotoInputData,
-  DocumentTypeTypes, Input,
-  InputTypeTypes,
-  MediaTypeTypes,
-  PageTypes,
-} from '../models/v2/SendInputRequest';
+import SendInputRequest, { DocumentTypeTypes } from '../models/v2/SendInputRequest';
 import SendInputResponse from '../models/v2/SendInputResponse';
+import SendInputRequestBuilder from '../models/v2/SendInputRequestBuilder';
 
 const clientId = process.env.CLIENT_ID || 'default';
 const clientSecret = process.env.CLIENT_SECRET || 'default';
@@ -29,33 +24,19 @@ async function main() {
       Front = 'front.png',
       Video = 'video.mp4',
     }
-    const sendInputRequest: SendInputRequest = {
-      inputs: [
-        <Input<DocumentPhotoInputData>>{
-          inputType: InputTypeTypes.DocumentPhoto,
-          group: 0,
-          data: {
-            type: DocumentTypeTypes.NationalId,
-            country: 'US',
-            region: 'IL',
-            page: PageTypes.Front,
-            filename: FileNames.Front,
-          },
-        },
-      ],
-      files: [
+    const sendInputRequest: SendInputRequest = SendInputRequestBuilder
+      .createWithDocumentPhoto(
         {
-          mediaType: MediaTypeTypes.Document,
-          fileName: FileNames.Front,
+          type: DocumentTypeTypes.NationalId,
+          country: 'US',
+          region: 'IL',
+        },
+        {
+          filename: FileNames.Front,
           stream: fs.createReadStream(`./assets/${FileNames.Front}`),
         },
-        {
-          mediaType: MediaTypeTypes.Video,
-          fileName: FileNames.Video,
-          stream: fs.createReadStream(`./assets/${FileNames.Video}`),
-        },
-      ],
-    };
+      )
+      .build();
     const sendInputResponse: SendInputResponse = await apiService.sendInput(id, sendInputRequest);
     console.log('sendInputResponse', sendInputResponse);
     console.log('all flow done');

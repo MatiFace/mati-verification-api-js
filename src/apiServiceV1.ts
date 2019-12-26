@@ -38,7 +38,7 @@ class ApiServiceV1 {
    * @param {string} options.clientSecret
    * @param {string} options.webhookSecret
    */
-  init(options: Options) {
+  public init(options: Options) {
     const {
       host,
       clientId,
@@ -60,9 +60,9 @@ class ApiServiceV1 {
    * @param {any} body - data came in request body
    * @returns {boolean} `true` if the signature is valid, `false` - otherwise
    */
-  validateSignature(signature: string, body: any): boolean {
+  public validateSignature(signature: string, body: any): boolean {
     if (!this.webhookSecret) {
-      return true;
+      throw new Error('No webhookSecret provided');
     }
     const bodyStr = JSON.stringify(body);
     const computedSignature = crypto
@@ -80,7 +80,7 @@ class ApiServiceV1 {
    * @returns {Promise<T>} resource
    * @throws ErrorResponse if we get http error
    */
-  async fetchResource<T>(url: string): Promise<T> {
+  public async fetchResource<T>(url: string): Promise<T> {
     return this.callHttp({ url }) as Promise<T>;
   }
 
@@ -160,4 +160,5 @@ class ApiServiceV1 {
   }
 }
 
+export { ApiServiceV1 };
 export default new ApiServiceV1();

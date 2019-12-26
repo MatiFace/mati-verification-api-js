@@ -1,10 +1,9 @@
 import fs from 'fs';
 
 import './config';
-import { apiService } from '../main';
+import { apiService, SendInputRequestBuilder } from '../main';
 import SendInputRequest, { DocumentTypeTypes } from '../models/v2/SendInputRequest';
 import SendInputResponse from '../models/v2/SendInputResponse';
-import SendInputRequestBuilder from '../models/v2/SendInputRequestBuilder';
 
 const clientId = process.env.CLIENT_ID || 'default';
 const clientSecret = process.env.CLIENT_SECRET || 'default';

@@ -42,7 +42,7 @@ class ApiService {
    * @param {string} options.clientSecret
    * @param {string} options.webhookSecret
    */
-  init(options: Options) {
+  public init(options: Options) {
     const {
       host,
       clientId,
@@ -64,9 +64,9 @@ class ApiService {
    * @param {any} body - data came in request body
    * @returns {boolean} `true` if the signature is valid, `false` - otherwise
    */
-  validateSignature(signature: string, body: any): boolean {
+  public validateSignature(signature: string, body: any): boolean {
     if (!this.webhookSecret) {
-      return true;
+      throw new Error('No webhookSecret provided');
     }
     const bodyStr = JSON.stringify(body);
     const computedSignature = crypto
@@ -84,7 +84,7 @@ class ApiService {
    * @returns {Promise<T>} resource
    * @throws ErrorResponse if we get http error
    */
-  async fetchResource<T>(url: string): Promise<T> {
+  public async fetchResource<T>(url: string): Promise<T> {
     return this.callHttp({ url }) as Promise<T>;
   }
 
@@ -95,7 +95,7 @@ class ApiService {
    * @returns {Promise<IdentityResource>} resource of identity created.
    * @throws ErrorResponse if we get http error
    */
-  async createIdentity(metadata?: IdentityMetadata): Promise<IdentityResource> {
+  public async createIdentity(metadata?: IdentityMetadata): Promise<IdentityResource> {
     return this.callHttp({
       path: 'v2/identities',
       requestOptions: {
@@ -114,7 +114,7 @@ class ApiService {
    * @returns {Promise<SendInputResponse>} resource of identity created.
    * @throws ErrorResponse if we get http error
    */
-  async sendInput(
+  public async sendInput(
     identityId: string,
     sendInputRequest: SendInputRequest,
   ): Promise<SendInputResponse> {
@@ -205,4 +205,5 @@ class ApiService {
   }
 }
 
+export { ApiService };
 export default new ApiService();

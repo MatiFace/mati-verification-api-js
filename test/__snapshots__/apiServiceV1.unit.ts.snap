@@ -1,15 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`apiServiceV1 #auth valid creds should call callHttp 1`] = `
+exports[`apiService #fetchResource with 401 error  should call callHttp 1`] = `
 Array [
-  "https://api.getmati.com/oauth/token",
-  Object {
-    "body": "grant_type=client_credentials&scope=identity",
-    "headers": Object {
-      "authorization": "Basic Y2xpZW50SWQ6Y2xpZW50U2VjcmV0",
-      "content-type": "application/x-www-form-urlencoded",
+  Array [
+    "https://api.getmati.com/oauth/token",
+    Object {
+      "body": "grant_type=client_credentials&scope=identity",
+      "headers": Object {
+        "authorization": "Basic Y2xpZW50SWQ6Y2xpZW50U2VjcmV0",
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      "method": "POST",
     },
-    "method": "POST",
-  },
+  ],
+]
+`;
+
+exports[`apiService #fetchResource with 401 error  should resolve with resource 1`] = `"Oooups!"`;
+
+exports[`apiService #fetchResource with right auth should call callHttp 1`] = `
+Array [
+  Array [
+    "https://api.getmati.com/oauth/token",
+    Object {
+      "body": "grant_type=client_credentials&scope=identity",
+      "headers": Object {
+        "authorization": "Basic Y2xpZW50SWQ6Y2xpZW50U2VjcmV0",
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      "method": "POST",
+    },
+  ],
+  Array [
+    "http://resourceUrl",
+    Object {
+      "headers": Object {
+        "authorization": "Bearer undefined",
+      },
+    },
+  ],
+]
+`;
+
+exports[`apiServiceV1 #fetchResource with right auth should call callHttp 1`] = `
+Array [
+  Array [
+    "https://api.getmati.com/oauth/token",
+    Object {
+      "body": "grant_type=client_credentials&scope=identity",
+      "headers": Object {
+        "authorization": "Basic Y2xpZW50SWQ6Y2xpZW50U2VjcmV0",
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      "method": "POST",
+    },
+  ],
+  Array [
+    "http://resourceUrl",
+    Object {
+      "headers": Object {
+        "authorization": "Bearer undefined",
+      },
+    },
+  ],
 ]
 `;

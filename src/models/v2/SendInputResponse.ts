@@ -1,6 +1,13 @@
-export class InputResult {
-  result: boolean;
+interface InputError {
+  type: string;
+  code: string;
+  message?: string;
+  details?: any;
 }
 
-export default interface SendInputResponse extends Array<InputResult> {
+export class InputResult {
+  result: boolean;
+  error: InputError;
 }
+
+export default interface SendInputResponse extends Array<Partial<InputResult>> {}

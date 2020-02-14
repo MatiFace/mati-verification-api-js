@@ -5,9 +5,14 @@ interface InputError {
   details?: any;
 }
 
-export class InputResult {
+interface InputSuccessResult {
   result: boolean;
+}
+
+interface InputErrorResult {
   error: InputError;
 }
 
-export default interface SendInputResponse extends Array<Partial<InputResult>> {}
+type InputResult = InputSuccessResult | InputErrorResult;
+
+export default interface SendInputResponse extends Array<InputResult> {}

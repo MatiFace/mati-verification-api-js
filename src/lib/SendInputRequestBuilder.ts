@@ -4,7 +4,7 @@ import SendInputRequest, {
   Input,
   InputTypeTypes, MediaTypeTypes,
   PageTypes, SelfiePhotoInputData, SelfieVideoInputData,
-} from './SendInputRequest';
+} from '../models/v2/SendInputRequest';
 
 export type DocumentData = {
   type: DocumentTypeTypes;

@@ -37,6 +37,9 @@ async function main() {
       )
       .build();
     const sendInputResponse: SendInputResponse = await apiService.sendInput(id, sendInputRequest);
+    if (sendInputResponse.some((inputResult) => !inputResult.result)) {
+      throw new Error('Input error');
+    }
     console.log('sendInputResponse', sendInputResponse);
     console.log('all flow done');
   } catch (err) {

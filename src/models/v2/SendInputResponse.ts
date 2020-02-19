@@ -7,7 +7,7 @@ export enum InputErrorType {
 export enum SelfieVideoInputErrorCode {
   ConversionFailed = 'selfieVideo.conversionFailed',
   MultipleFaces = 'selfieVideo.multipleFaces',
-  NotEnoughFaces = 'selfieVideo.notEnoughFaces',
+  NoFace = 'selfieVideo.noFace',
 }
 
 export enum CommonInputErrorCode {

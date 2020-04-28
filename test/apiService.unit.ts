@@ -96,7 +96,7 @@ describe('apiService', () => {
     };
 
     describe('when right signature', () => {
-      const context: Context = withApiService((createContext()));
+      const context: Context = withApiService(createContext());
       it('should return false', () => {
         expect(context.apiService.validateSignature(
           '0c5ed2cad914fd2a1571b47bb087953af574a353ff9d96f8603f8c0d7955340c',
@@ -119,7 +119,7 @@ describe('apiService', () => {
     });
 
     describe('when wrong signature', () => {
-      const context: Context = withApiService((createContext()));
+      const context: Context = withApiService(createContext());
       it('should return false', () => {
         expect(context.apiService.validateSignature('wrong sig', webhookResource)).toBe(false);
       });
@@ -136,7 +136,7 @@ describe('apiService', () => {
       const resource: Resource = {
         name: 'resourceName',
       };
-      const context: Context = withApiService((createContext()));
+      const context: Context = withApiService(createContext());
       withHttpMocks(
         () => Promise.resolve(resource),
       );
@@ -147,7 +147,7 @@ describe('apiService', () => {
     });
 
     describe('with 401 error ', () => {
-      const context: Context = withApiService((createContext()));
+      const context: Context = withApiService(createContext());
       withHttpMocks(
         () => Promise.reject(new ErrorResponse('Oooups!', ({ status: 401 } as unknown) as Response)),
       );
@@ -164,7 +164,7 @@ describe('apiService', () => {
       _id: 'identityId',
       status: IdentityStatusTypes.Pending,
     };
-    const context: Context = withApiService((createContext()));
+    const context: Context = withApiService(createContext());
     withHttpMocks(
       () => Promise.resolve(identityResource),
     );
@@ -211,7 +211,7 @@ describe('apiService', () => {
       { result: true },
       { result: false },
     ];
-    const context: Context = withApiService((createContext()));
+    const context: Context = withApiService(createContext());
     withHttpMocks(() => Promise.resolve(sendInputResponse));
     it('should resolve with resource',
       () => expect(context.apiService.sendInput('identityId', sendInputRequest))

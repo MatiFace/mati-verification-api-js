@@ -15,6 +15,7 @@ export const API_HOST = 'https://api.getmati.com';
 export type Options = {
   clientId: string;
   clientSecret: string;
+  flowId?: string;
   host?: string;
   webhookSecret?: string;
 };
@@ -30,6 +31,8 @@ class ApiService {
   private bearerAuthHeader: string;
 
   private clientAuthHeader: string;
+
+  private flowId: string | undefined;
 
   private host: string;
 
@@ -47,9 +50,11 @@ class ApiService {
       host,
       clientId,
       clientSecret,
+      flowId,
       webhookSecret,
     } = options;
     this.host = host || API_HOST;
+    this.flowId = flowId;
     this.webhookSecret = webhookSecret || false;
     this.setClientAuth(clientId, clientSecret);
   }
@@ -96,11 +101,15 @@ class ApiService {
    * @throws ErrorResponse if we get http error
    */
   public async createIdentity(metadata?: IdentityMetadata): Promise<IdentityResource> {
+    const body: Record<string, any> = { metadata };
+    if (this.flowId) {
+      body.flowId = this.flowId;
+    }
     return this.callHttp({
       path: 'v2/identities',
       requestOptions: {
         method: 'POST',
-        body: { metadata },
+        body,
       },
     }) as Promise<IdentityResource>;
   }

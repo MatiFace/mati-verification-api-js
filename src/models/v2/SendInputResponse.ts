@@ -38,7 +38,7 @@ interface InputError {
 
 export interface InputResult  {
   result?: boolean;
-  error: InputError;
+  error?: InputError;
 }
 
 export default interface SendInputResponse extends Array<InputResult> {}

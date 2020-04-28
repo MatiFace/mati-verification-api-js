@@ -21,10 +21,15 @@ export type Options = {
 };
 
 type CallHttpParamsType = {
-  url?: string,
-  path?: string,
-  requestOptions?: RequestOptions,
-  authType?: 'bearer' | 'basic' | 'none',
+  url?: string;
+  path?: string;
+  requestOptions?: RequestOptions;
+  authType?: 'bearer' | 'basic' | 'none';
+};
+
+type CreateIdentityPayload = {
+  flowId?: string;
+  metadata?: IdentityMetadata;
 };
 
 class ApiService {
@@ -101,7 +106,7 @@ class ApiService {
    * @throws ErrorResponse if we get http error
    */
   public async createIdentity(metadata?: IdentityMetadata): Promise<IdentityResource> {
-    const body: Record<string, any> = { metadata };
+    const body: CreateIdentityPayload = { metadata };
     if (this.flowId) {
       body.flowId = this.flowId;
     }

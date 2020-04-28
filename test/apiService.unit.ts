@@ -176,6 +176,7 @@ describe('apiService', () => {
     });
 
     describe('with specified flowId', () => {
+      const flowId = '5ea832b35ada455758d3faa7';
       const identityResource: IdentityResource = {
         _id: 'identityId',
         status: IdentityStatusTypes.Pending,
@@ -183,7 +184,7 @@ describe('apiService', () => {
       const context: Context = withApiService(createContext(), {
         clientId,
         clientSecret,
-        flowId: '5ea832b35ada455758d3faa7',
+        flowId,
       });
       withHttpMocks(
         () => Promise.resolve(identityResource),

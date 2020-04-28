@@ -9,5 +9,6 @@ export enum IdentityStatusTypes {
 
 export default interface IdentityResource {
   _id: string; // TODO Rename
+  flowId?: string;
   status: IdentityStatusTypes;
 }

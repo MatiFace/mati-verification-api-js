@@ -160,18 +160,39 @@ describe('apiService', () => {
   });
 
   describe('#createIdentity', () => {
-    const identityResource: IdentityResource = {
-      _id: 'identityId',
-      status: IdentityStatusTypes.Pending,
-    };
-    const context: Context = withApiService(createContext());
-    withHttpMocks(
-      () => Promise.resolve(identityResource),
-    );
-    it('should resolve with resource',
-      () => expect(context.apiService.createIdentity(METADATA)).resolves.toBe(identityResource));
-    it('should call callHttp',
-      () => expect(callHttpMock.mock.calls).toMatchSnapshot());
+    describe('without specified flowId', () => {
+      const identityResource: IdentityResource = {
+        _id: 'identityId',
+        status: IdentityStatusTypes.Pending,
+      };
+      const context: Context = withApiService(createContext());
+      withHttpMocks(
+        () => Promise.resolve(identityResource),
+      );
+      it('should resolve with resource',
+        () => expect(context.apiService.createIdentity(METADATA)).resolves.toBe(identityResource));
+      it('should call callHttp',
+        () => expect(callHttpMock.mock.calls).toMatchSnapshot());
+    });
+
+    describe('with specified flowId', () => {
+      const identityResource: IdentityResource = {
+        _id: 'identityId',
+        status: IdentityStatusTypes.Pending,
+      };
+      const context: Context = withApiService(createContext(), {
+        clientId,
+        clientSecret,
+        flowId: '5ea832b35ada455758d3faa7',
+      });
+      withHttpMocks(
+        () => Promise.resolve(identityResource),
+      );
+      it('should resolve with resource',
+        () => expect(context.apiService.createIdentity(METADATA)).resolves.toBe(identityResource));
+      it('should call callHttp',
+        () => expect(callHttpMock.mock.calls).toMatchSnapshot());
+    });
   });
 
   describe('#sendInput', () => {

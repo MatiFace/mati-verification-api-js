@@ -22,6 +22,8 @@ export enum DocumentPhotoInputErrorCode {
   BadText = 'documentPhoto.badText',
   BlurryText = 'documentPhoto.blurryText',
   SmallImageSize = 'documentPhoto.smallImageSize',
+  NoText = 'documentPhoto.noText',
+  NoFace = 'documentPhoto.noFace',
 }
 
 export enum SelfiePhotoInputErrorCode {

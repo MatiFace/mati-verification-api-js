@@ -1,6 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`apiService #createIdentity should call callHttp 1`] = `
+exports[`apiService #createIdentity with specified flowId should call callHttp 1`] = `
+Array [
+  Array [
+    "https://api.getmati.com/oauth",
+    Object {
+      "body": "grant_type=client_credentials",
+      "headers": Object {
+        "authorization": "Basic Y2xpZW50SWQ6Y2xpZW50U2VjcmV0",
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      "method": "POST",
+    },
+  ],
+  Array [
+    "https://api.getmati.com/v2/identities",
+    Object {
+      "body": Object {
+        "flowId": "5ea832b35ada455758d3faa7",
+        "metadata": Object {
+          "email": "john@gmail.com",
+        },
+      },
+      "headers": Object {
+        "authorization": "Bearer access_token",
+      },
+      "method": "POST",
+    },
+  ],
+]
+`;
+
+exports[`apiService #createIdentity without specified flowId should call callHttp 1`] = `
 Array [
   Array [
     "https://api.getmati.com/oauth",

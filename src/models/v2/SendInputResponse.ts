@@ -36,9 +36,14 @@ interface InputError {
   details?: any;
 }
 
-export interface InputResult  {
-  result?: boolean;
+interface ErrorInputResult {
   error: InputError;
 }
+
+interface SuccessInputResult {
+  result: boolean;
+}
+
+export type InputResult = ErrorInputResult | SuccessInputResult;
 
 export default interface SendInputResponse extends Array<InputResult> {}
